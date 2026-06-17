@@ -10,9 +10,9 @@ Modern MERN developer portfolio for Rakesh Dhangar with:
 
 ## Scripts
 
-- `npm run dev` starts the Vite client and also attempts to start the Express server
+- `npm run dev` starts the Vite client and Express server together
 - `npm run dev:client` starts only the Vite client
-- `npm run dev:server` starts only the Express server with Node watch mode
+- `npm run dev:server` starts only the Express server with `nodemon`
 - `npm run build` builds the client into `dist`
 - `npm run start` starts the Express server
 - `npm run preview` previews the production build from `dist`

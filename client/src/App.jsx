@@ -41,9 +41,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -104,7 +102,11 @@ function App() {
 
       <div className="app-shell">
         <div className="app-grid" aria-hidden="true" />
-        <Navbar items={navItems} activeSection={activeSection} ownerName={portfolioData.owner.name} />
+        <Navbar
+          items={navItems}
+          activeSection={activeSection}
+          ownerName={portfolioData.owner.name}
+        />
 
         <motion.main
           className="site-main"
