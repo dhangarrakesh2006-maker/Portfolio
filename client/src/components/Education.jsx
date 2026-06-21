@@ -1,7 +1,18 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import SectionHeading from './SectionHeading';
 
 export default function Education({ timeline }) {
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 0.8', 'end 0.35'],
+  });
+  const progressScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 26,
+  });
+
   return (
     <section id="education" data-section className="section-band">
       <div className="section-shell">
@@ -12,7 +23,10 @@ export default function Education({ timeline }) {
         />
 
         <div className="education-layout">
-          <div className="timeline">
+          <div className="timeline" ref={timelineRef}>
+            <div className="timeline-track" aria-hidden="true" />
+            <motion.div className="timeline-progress-line" style={{ scaleY: progressScale }} aria-hidden="true" />
+
             {timeline.map((item, index) => (
               <motion.article
                 key={`${item.year}-${item.title}`}
