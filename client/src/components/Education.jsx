@@ -28,25 +28,49 @@ export default function Education({ timeline }) {
             <motion.div className="timeline-progress-line" style={{ scaleY: progressScale }} aria-hidden="true" />
 
             {timeline.map((item, index) => (
-              <motion.article
-                key={`${item.year}-${item.title}`}
-                className="timeline-item"
-                initial={{ opacity: 0, x: -24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.08, duration: 0.45 }}
-              >
+              <article key={`${item.year}-${item.title}`} className="timeline-item">
                 <div className="timeline-marker">
                   <span />
                 </div>
+
                 <div className="glass-card timeline-card">
                   <div className="timeline-year">{item.year}</div>
                   <h3>{item.title}</h3>
                   <p className="timeline-subtitle">{item.subtitle}</p>
+
+                  {item.image ? (
+                    <div className="timeline-image-wrap">
+                      <img
+                        className="timeline-image"
+                        src={item.image}
+                        alt={`Photo of ${item.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          // try external placeholder if local file missing
+                          const placeholder = `https://via.placeholder.com/800x450?text=${encodeURIComponent(
+                            item.title,
+                          )}`;
+                          if (e.currentTarget.src === placeholder) {
+                            e.currentTarget.style.display = 'none';
+                            const parent = e.currentTarget.parentElement;
+                            if (parent) parent.classList.add('image-missing');
+                          } else {
+                            e.currentTarget.src = placeholder;
+                          }
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="timeline-image-wrap image-missing">
+                      <div className="image-fallback">Photo not available</div>
+                    </div>
+                  )}
+
                   <p>{item.detail}</p>
                   <strong>{item.meta}</strong>
                 </div>
-              </motion.article>
+              </article>
             ))}
           </div>
 

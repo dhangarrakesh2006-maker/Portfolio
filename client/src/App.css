@@ -780,6 +780,40 @@
   padding: 22px;
 }
 
+.timeline-image-wrap {
+  margin: 18px 0 10px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.timeline-image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 220px;
+}
+
+.timeline-image-wrap.image-missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(2,6,23,0.7), rgba(12,18,36,0.6));
+  color: var(--text-muted);
+  min-height: 120px;
+}
+
+.image-fallback {
+  padding: 18px 12px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* Reduce heavy transitions for timeline items to improve scroll performance */
+.timeline-item {
+  will-change: auto;
+}
+
 .timeline-year {
   color: var(--accent-cyan);
   font-size: 0.88rem;
